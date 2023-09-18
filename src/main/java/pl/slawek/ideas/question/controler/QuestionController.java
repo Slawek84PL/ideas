@@ -1,5 +1,6 @@
 package pl.slawek.ideas.question.controler;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.slawek.ideas.question.service.QuestionService;
 import pl.slawek.ideas.question.domain.model.Question;
@@ -22,22 +23,24 @@ class QuestionController {
         return questionService.getQuestions();
     }
 
-    @GetMapping({"id"})
+    @GetMapping("{id}")
     Question getQuestion(@PathVariable UUID id) {
         return questionService.getQuestion(id);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     Question createQuestion(@RequestBody Question question) {
         return questionService.createQuestion(question);
     }
-
-    @PutMapping({"id"})
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PutMapping("{id}")
     Question updateQuestion(@PathVariable UUID id, @RequestBody Question question) {
         return questionService.updateQuestion(id, question);
     }
 
-    @DeleteMapping({"id"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
     void deleteQuestion(@PathVariable UUID id) {
         questionService.deleteQuestion(id);
     }
