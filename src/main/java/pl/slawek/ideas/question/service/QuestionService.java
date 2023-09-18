@@ -17,15 +17,16 @@ public class QuestionService {
     }
 
     public Question getQuestion(final UUID id) {
-        return null;
+        return new Question("Question " + id);
     }
 
-    public Question createQuestion(final Question question) {
+    public Question createQuestion(Question question) {
+        question.setId(UUID.randomUUID());
         return null;
     }
 
     public Question updateQuestion(final UUID id, final Question question) {
-        return null;
+        return question;
     }
 
     public void deleteQuestion(final UUID id) {

@@ -29,7 +29,7 @@ public class Question {
         return id;
     }
 
-    void setId(final UUID id) {
+    public void setId(final UUID id) {
         this.id = id;
     }
 
