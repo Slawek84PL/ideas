@@ -1,7 +1,8 @@
-package pl.slawek.ideas;
+package pl.slawek.ideas.question.controler;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.slawek.ideas.question.service.QuestionService;
+import pl.slawek.ideas.question.domain.model.Question;
 
 import java.util.List;
 import java.util.UUID;

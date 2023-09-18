@@ -3,7 +3,7 @@ package pl.slawek.ideas.question.domain.model;
 
 import java.util.UUID;
 
-class Question {
+public class Question {
 
     private UUID id;
 
