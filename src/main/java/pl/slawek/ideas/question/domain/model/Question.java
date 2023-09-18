@@ -12,7 +12,7 @@ public class Question {
     Question() {
     }
 
-    Question(final String name) {
+    public Question(final String name) {
         this.name = name;
         this.id = UUID.randomUUID();
     }
