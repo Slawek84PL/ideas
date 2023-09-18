@@ -22,7 +22,7 @@ public class QuestionService {
 
     public Question createQuestion(Question question) {
         question.setId(UUID.randomUUID());
-        return null;
+        return question;
     }
 
     public Question updateQuestion(final UUID id, final Question question) {

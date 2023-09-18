@@ -25,7 +25,7 @@ public class Question {
         this.name = name;
     }
 
-    UUID getId() {
+    public UUID getId() {
         return id;
     }
 
