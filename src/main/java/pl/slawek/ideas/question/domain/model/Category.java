@@ -3,20 +3,20 @@ package pl.slawek.ideas.question.domain.model;
 
 import java.util.UUID;
 
-class Category {
+public class Category {
 
     private UUID id;
     private String name;
 
-    Category() {
+    public Category() {
     }
 
-    Category(final UUID id, final String name) {
-        this.id = id;
+    public Category(final String name) {
         this.name = name;
+        this.id = UUID.randomUUID();
     }
 
-    UUID getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -24,11 +24,11 @@ class Category {
         this.id = id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    void setName(final String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 }
