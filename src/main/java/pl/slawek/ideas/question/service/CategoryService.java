@@ -4,14 +4,16 @@ import org.springframework.stereotype.Service;
 import pl.slawek.ideas.question.domain.model.Category;
 import pl.slawek.ideas.question.exceptions.NotFoundException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class CategoryService {
 
-    private final List<Category> categoryList = new ArrayList<>();
+    private final List<Category> categoryList = List.of(
+            new Category("Category 1"),
+            new Category("Category 2"),
+            new Category("Category 3"));
 
     public List<Category> getCategories() {
         return categoryList;

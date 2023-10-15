@@ -9,7 +9,7 @@ public class Question {
 
     private String name;
 
-    Question() {
+    public Question() {
     }
 
     public Question(final String name) {

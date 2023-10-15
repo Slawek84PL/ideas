@@ -11,7 +11,10 @@ import java.util.UUID;
 @Service
 public class AnswerService {
     public List<Answer> getAnswers(final UUID questionId) {
-        return Arrays.asList(new Answer("Answer 1"), new Answer("Answer 2"));
+        return Arrays.asList(
+                new Answer("Answer 1"),
+                new Answer("Answer 2"),
+                new Answer("Answer 3"));
     }
 
     public Answer getAnswer(final UUID id) {

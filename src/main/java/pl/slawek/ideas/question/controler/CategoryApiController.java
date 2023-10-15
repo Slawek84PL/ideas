@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/categories")
-class CategoryController {
+class CategoryApiController {
 
     private final CategoryService categoryService;
 
-    CategoryController(final CategoryService categoryService) {
+    CategoryApiController(final CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -36,7 +36,7 @@ class CategoryController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("{id}")
-   Category updateCategory(@PathVariable UUID id, @RequestBody Category category) {
+    Category updateCategory(@PathVariable UUID id, @RequestBody Category category) {
         return categoryService.updateCategory(id, category);
     }
 

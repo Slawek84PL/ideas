@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/questions")
-class QuestionController {
+class QuestionApiController {
 
     private final QuestionService questionService;
 
-    QuestionController(final QuestionService questionService) {
+    QuestionApiController(final QuestionService questionService) {
         this.questionService = questionService;
     }
 
