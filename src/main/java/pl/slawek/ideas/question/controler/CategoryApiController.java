@@ -40,7 +40,6 @@ class CategoryApiController {
         return categoryService.updateCategory(id, category);
     }
 
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     void deleteCategory(@PathVariable UUID id) {
