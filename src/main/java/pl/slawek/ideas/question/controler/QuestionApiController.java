@@ -33,6 +33,7 @@ class QuestionApiController {
     Question createQuestion(@RequestBody Question question) {
         return questionService.createQuestion(question);
     }
+
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("{id}")
     Question updateQuestion(@PathVariable UUID id, @RequestBody Question question) {
