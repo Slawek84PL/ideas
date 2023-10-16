@@ -31,6 +31,7 @@ class QuestionViewController {
     public String indexView(Model model) {
         model.addAttribute("questions", questionService.getQuestions());
         model.addAttribute("categories", categoryService.getCategories());
+
         return "question/index";
     }
 
