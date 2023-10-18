@@ -47,6 +47,7 @@ class QuestionViewController {
     @GetMapping("/add")
     public String addView(Model model) {
         model.addAttribute("question", new Question());
+
         return "question/add";
     }
 
