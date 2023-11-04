@@ -1,0 +1,22 @@
+ideas:
+  name: Ideas application
+
+spring:
+  datasource:
+    url: jdbc:postgresql://raspberrypi.local:5432/ideas
+    username: postgres
+    password: password
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+    show-sql: true
+
+  sql:
+    init:
+      mode: always
