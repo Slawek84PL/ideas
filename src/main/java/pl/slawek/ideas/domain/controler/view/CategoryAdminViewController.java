@@ -1,10 +1,10 @@
-package pl.slawek.ideas.question.controler.view;
+package pl.slawek.ideas.domain.controler.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.slawek.ideas.question.domain.model.Category;
-import pl.slawek.ideas.question.service.CategoryService;
+import pl.slawek.ideas.domain.model.Category;
+import pl.slawek.ideas.domain.service.CategoryService;
 
 import java.util.UUID;
 

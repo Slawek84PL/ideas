@@ -1,9 +1,9 @@
-package pl.slawek.ideas.question.controler;
+package pl.slawek.ideas.domain.controler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.slawek.ideas.question.domain.model.Category;
-import pl.slawek.ideas.question.service.CategoryService;
+import pl.slawek.ideas.domain.model.Category;
+import pl.slawek.ideas.domain.service.CategoryService;
 
 import java.util.List;
 import java.util.UUID;

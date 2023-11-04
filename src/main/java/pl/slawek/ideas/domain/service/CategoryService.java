@@ -1,8 +1,8 @@
-package pl.slawek.ideas.question.service;
+package pl.slawek.ideas.domain.service;
 
 import org.springframework.stereotype.Service;
-import pl.slawek.ideas.question.domain.model.Category;
-import pl.slawek.ideas.question.exceptions.NotFoundException;
+import pl.slawek.ideas.domain.model.Category;
+import pl.slawek.ideas.domain.exceptions.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

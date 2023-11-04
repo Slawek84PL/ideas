@@ -1,4 +1,4 @@
-package pl.slawek.ideas.question.exceptions;
+package pl.slawek.ideas.domain.exceptions;
 
 import java.util.UUID;
 

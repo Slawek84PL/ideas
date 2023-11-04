@@ -1,18 +1,18 @@
-package pl.slawek.ideas.question.domain.model;
+package pl.slawek.ideas.domain.model;
 
 
 import java.util.UUID;
 
-public class Answer {
+public class Question {
 
     private UUID id;
 
     private String name;
 
-    Answer() {
+    public Question() {
     }
 
-    public Answer(final String name) {
+    public Question(final String name) {
         this.name = name;
         this.id = UUID.randomUUID();
     }
@@ -35,7 +35,7 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answer{" +
+        return "Question{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

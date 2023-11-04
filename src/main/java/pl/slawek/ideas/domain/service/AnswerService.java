@@ -1,8 +1,8 @@
-package pl.slawek.ideas.question.service;
+package pl.slawek.ideas.domain.service;
 
 import org.springframework.stereotype.Service;
-import pl.slawek.ideas.question.domain.model.Answer;
-import pl.slawek.ideas.question.domain.model.Question;
+import pl.slawek.ideas.domain.model.Answer;
+import pl.slawek.ideas.domain.model.Question;
 
 import java.util.Arrays;
 import java.util.List;
