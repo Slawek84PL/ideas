@@ -3,7 +3,6 @@ package pl.slawek.ideas.domain.controler;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.slawek.ideas.domain.model.Answer;
-import pl.slawek.ideas.domain.model.Question;
 import pl.slawek.ideas.domain.service.AnswerService;
 
 import java.util.List;
@@ -29,22 +28,22 @@ class AnswerController {
         return answerService.getAnswer(answerId);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    Answer createQuestion(@PathVariable("question-id") UUID questionId, @RequestBody Answer answer) {
+    @ResponseStatus(HttpStatus.CREATED)
+    Answer createAnswer(@PathVariable("question-id") UUID questionId, @RequestBody Answer answer) {
         return answerService.createAnswer(questionId, answer);
     }
-    @ResponseStatus(HttpStatus.ACCEPTED)
+
     @PutMapping("{answer-id}")
-    Question updateAnswer(
-            @PathVariable("question-id") UUID questionId,
-            @PathVariable("answer-id") UUID answerId,
-            @RequestBody Question question) {
-        return answerService.updateAnswer(answerId, question);
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    Answer updateAnswer(
+            @PathVariable("question-id") UUID questionId, @PathVariable("answer-id") UUID answerId,
+            @RequestBody Answer answer) {
+        return answerService.updateAnswer(answerId, answer);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{answer-id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteAnswer(@PathVariable("answer-id") UUID answerId) {
         answerService.deleteAnswer(answerId);
     }

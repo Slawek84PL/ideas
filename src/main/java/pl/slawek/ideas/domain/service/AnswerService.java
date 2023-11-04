@@ -1,35 +1,61 @@
 package pl.slawek.ideas.domain.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.slawek.ideas.domain.model.Answer;
 import pl.slawek.ideas.domain.model.Question;
+import pl.slawek.ideas.domain.repository.AnswerRepository;
+import pl.slawek.ideas.domain.repository.QuestionRepository;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class AnswerService {
+
+    private final AnswerRepository repository;
+
+    private final QuestionRepository questionRepository;
+
+    public AnswerService(AnswerRepository repository, QuestionRepository questionRepository) {
+        this.repository = repository;
+        this.questionRepository = questionRepository;
+    }
+
+    @Transactional(readOnly = true)
     public List<Answer> getAnswers(final UUID questionId) {
-        return Arrays.asList(
-                new Answer("Answer 1"),
-                new Answer("Answer 2"),
-                new Answer("Answer 3"));
+        return repository.findAllByQuestionId(questionId);
     }
 
+    @Transactional(readOnly = true)
     public Answer getAnswer(final UUID id) {
-        return new Answer("Answer " + id);
+        return repository.getReferenceById(id);
     }
 
-    public Answer createAnswer(final UUID questionId, final Answer answer) {
-        return new Answer("Answer");
+    @Transactional
+    public Answer createAnswer(final UUID questionId, final Answer answerRequest) {
+        Answer answer = new Answer();
+
+        answer.setName(answerRequest.getName());
+
+        Question question = questionRepository.getReferenceById(questionId);
+        question.addAnswer(answer);
+
+        repository.save(answer);
+        questionRepository.save(question);
+
+        return answer;
     }
 
-    public Question updateAnswer(final UUID id, final Question question) {
-        return null;
+    @Transactional
+    public Answer updateAnswer(final UUID answerId, Answer answerRequest) {
+        Answer answer = repository.getReferenceById(answerId);
+        answer.setName(answerRequest.getName());
+
+        return repository.save(answer);
     }
 
-    public void deleteAnswer(final UUID id) {
-
+    public void deleteAnswer(final UUID answerId) {
+        repository.deleteById(answerId);
     }
 }
