@@ -1,51 +1,50 @@
 package pl.slawek.ideas.domain.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.slawek.ideas.domain.model.Category;
-import pl.slawek.ideas.domain.exceptions.NotFoundException;
+import pl.slawek.ideas.domain.repository.CategoryRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class CategoryService {
 
-    private ArrayList<Category> categoryList = new ArrayList<>(List.of(
-            new Category("Category 1"),
-            new Category("Category 2"),
-            new Category("Category 3")));
+    private final CategoryRepository repository;
 
+    public CategoryService(CategoryRepository repository) {
+        this.repository = repository;
+    }
+
+    @Transactional(readOnly = true)
     public List<Category> getCategories() {
-        return categoryList;
+        return repository.findAll();
     }
 
-    public Category createCategory(final Category category) {
-        Category newCategory = new Category(category.getName());
-        categoryList.add(newCategory);
-        return newCategory;
-    }
 
-    public Category updateCategory(final UUID id, final Category category) {
-        Category oldCategory = categoryService(id);
-        oldCategory.setName(category.getName());
-        return oldCategory;
-    }
-
-    public void deleteCategory(final UUID id) {
-        categoryList.remove(categoryService(id));
-    }
-
+    @Transactional(readOnly = true)
     public Category getCategory(final UUID id) {
-        return categoryService(id);
+        return repository.getReferenceById(id);
     }
 
-    private Category categoryService(final UUID id) {
-        for (Category category : categoryList) {
-            if (category.getId().equals(id)) {
-                return category;
-            }
-        }
-        throw new NotFoundException("category", id);
+    @Transactional
+    public Category createCategory(final Category categoryRequest) {
+        Category category = new Category();
+        category.setName(categoryRequest.getName());
+
+        return repository.save(category);
+    }
+
+    @Transactional
+    public Category updateCategory(final UUID id, final Category categoryRequest) {
+        Category category = repository.getReferenceById(id);
+        category.setName(categoryRequest.getName());
+        return repository.save(category);
+    }
+
+    @Transactional
+    public void deleteCategory(final UUID id) {
+        repository.deleteById(id);
     }
 }

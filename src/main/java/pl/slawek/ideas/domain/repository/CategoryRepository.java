@@ -2,7 +2,11 @@ package pl.slawek.ideas.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pl.slawek.ideas.domain.model.Category;
+
+import java.util.UUID;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category,> {
+public interface CategoryRepository extends JpaRepository<Category, UUID> {
+
 }
