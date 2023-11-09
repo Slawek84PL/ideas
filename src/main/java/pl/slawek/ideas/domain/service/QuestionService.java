@@ -49,4 +49,9 @@ public class QuestionService {
     public void deleteQuestion(final UUID id) {
         repository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Question> findAllByCategoryId(UUID id) {
+        return repository.findAllByCategoryId(id);
+    }
 }
