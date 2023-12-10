@@ -4,6 +4,7 @@ package pl.slawek.ideas.domain.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ public class Category {
     @Id
     private UUID id;
 
+    @NotBlank(message = "{ideas.validation.name.NotBlank.message}")
     private String name;
 
     public Category() {
