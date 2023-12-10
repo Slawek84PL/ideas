@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{admin/template :: head(title = 'Ideas - Admin')}"></head>
 
 <body class="hold-transition sidebar-mini">
@@ -39,27 +39,27 @@
                             <div class="card-header">
                                 <h3 class="card-title">Responsive Hover Table</h3>
 
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /.card-header -->
-
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Category</h3>
-                                </div>
                                 <!-- /.card-header -->
-                                <!-- form start -->
-                                <form method="post" th:object="${category}">
+
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Category</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="categoryName">Name</label>
@@ -71,32 +71,20 @@
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
-                                </form>
-                            </div>
-                        <!-- /.card -->
-                    </div>
-                </div>
-                <!-- /.row -->
+                                </div>
+                            </div><!-- /.card -->
+                        </div>
+                    </div><!-- /.row -->
+                </form>
             </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+        </div><!-- /.content -->
+    </div><!-- /.content-wrapper -->
 
     <th:block th:replace="~{admin/template :: right-bar}" />
 
     <th:block th:replace="~{admin/template :: footer}" />
 
-</div>
-<!-- ./wrapper -->
+</div><!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
 </body>
 </html>
