@@ -330,8 +330,8 @@
 
         <th:block th:if="${message != null}">
             <script>
-                $(document).Toast(create, {
-                    class: bg-maroon,
+                $(document).Toasts('create', {
+                    class: 'bg-maroon',
                     title: '[[${message.title}]]',
                     body: '[[${message.content}]]'
                 })
