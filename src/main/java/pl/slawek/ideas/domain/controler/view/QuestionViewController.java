@@ -1,5 +1,6 @@
 package pl.slawek.ideas.domain.controler.view;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ class QuestionViewController {
     @GetMapping
     public String indexView(Model model) {
         model.addAttribute("questions", questionService.getQuestions());
-        model.addAttribute("categories", categoryService.getCategories());
+        model.addAttribute("categories", categoryService.getCategories(Pageable.unpaged()));
 
         return "question/index";
     }
@@ -39,7 +40,7 @@ class QuestionViewController {
     public String singleView(Model model, @PathVariable UUID id) {
         model.addAttribute("question", questionService.getQuestion(id));
         model.addAttribute("answers", answerService.getAnswers(id));
-        model.addAttribute("categories", categoryService.getCategories());
+        model.addAttribute("categories", categoryService.getCategories(Pageable.unpaged()));
 
         return "question/single";
     }

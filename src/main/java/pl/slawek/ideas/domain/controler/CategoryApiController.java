@@ -1,11 +1,12 @@
 package pl.slawek.ideas.domain.controler;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.slawek.ideas.domain.model.Category;
 import pl.slawek.ideas.domain.service.CategoryService;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,8 +20,8 @@ class CategoryApiController {
     }
 
     @GetMapping
-    List<Category> getCategories() {
-        return categoryService.getCategories();
+    Page<Category> getCategories(Pageable pageable) {
+        return categoryService.getCategories(pageable);
     }
 
     @GetMapping("{id}")
