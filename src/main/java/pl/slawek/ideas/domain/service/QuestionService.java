@@ -1,5 +1,7 @@
 package pl.slawek.ideas.domain.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.slawek.ideas.domain.model.Question;
@@ -7,6 +9,7 @@ import pl.slawek.ideas.domain.repository.QuestionRepository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -53,5 +56,15 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public List<Question> findAllByCategoryId(UUID id) {
         return repository.findAllByCategoryId(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findHot(Pageable pageable) {
+        return repository.findHot(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findUnanswered(Pageable pageable) {
+        return repository.findUnanswered(pageable);
     }
 }
