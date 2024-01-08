@@ -8,16 +8,20 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.slawek.ideas.domain.dto.Message;
 import pl.slawek.ideas.domain.model.Category;
 import pl.slawek.ideas.domain.service.CategoryService;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static pl.slawek.ideas.domain.common.ControllerUtils.paging;
 
 @Controller
 @RequestMapping("admin/categories")
@@ -32,7 +36,7 @@ class CategoryAdminViewController {
     @GetMapping
     public String indexView(
             @RequestParam(name = "s", required = false) String search,
-            @RequestParam(name = "field", required = false, defaultValue = "id") String field,
+            @RequestParam(name = "field", required = false, defaultValue = "name") String field,
             @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "size", required = false, defaultValue = "10") int size,
@@ -46,7 +50,9 @@ class CategoryAdminViewController {
         model.addAttribute("categoriesPage", categoriesPage );
         model.addAttribute("search", search);
         model.addAttribute("reverseSort", reverseSort);
+
         paging(model, categoriesPage);
+
         return "admin/category/index";
     }
 
@@ -110,17 +116,5 @@ class CategoryAdminViewController {
         ra.addFlashAttribute("message", Message.info("Kategoria usunięta"));
 
         return "redirect:/admin/categories";
-    }
-
-
-
-    private void paging(Model model, Page page) {
-        int totalPages = page.getTotalPages();
-        if (totalPages > 0 ) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
     }
 }

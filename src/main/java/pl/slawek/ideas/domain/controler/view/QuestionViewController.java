@@ -1,46 +1,45 @@
 package pl.slawek.ideas.domain.controler.view;
 
-import org.springframework.data.domain.Pageable;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import pl.slawek.ideas.domain.common.IdeasCommonViewController;
 import pl.slawek.ideas.domain.model.Question;
 import pl.slawek.ideas.domain.service.AnswerService;
-import pl.slawek.ideas.domain.service.CategoryService;
 import pl.slawek.ideas.domain.service.QuestionService;
 
 import java.util.UUID;
 
+import static pl.slawek.ideas.domain.common.ControllerUtils.paging;
+
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/questions")
-class QuestionViewController {
+class QuestionViewController extends IdeasCommonViewController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
-    private final CategoryService categoryService;
-
-    QuestionViewController(
-            final QuestionService questionService,
-            final AnswerService answerService,
-            final CategoryService categoryService) {
-        this.questionService = questionService;
-        this.answerService = answerService;
-        this.categoryService = categoryService;
-    }
 
     @GetMapping
     public String indexView(Model model) {
         model.addAttribute("questions", questionService.getQuestions());
-        model.addAttribute("categories", categoryService.getCategories(Pageable.unpaged()));
+        addGlobalAttribute(model);
 
-        return "question/index";
+        return "index/index";
     }
 
     @GetMapping("{id}")
     public String singleView(Model model, @PathVariable UUID id) {
         model.addAttribute("question", questionService.getQuestion(id));
         model.addAttribute("answers", answerService.getAnswers(id));
-        model.addAttribute("categories", categoryService.getCategories(Pageable.unpaged()));
+        addGlobalAttribute(model);
 
         return "question/single";
     }
@@ -57,6 +56,42 @@ class QuestionViewController {
         questionService.createQuestion(question);
 
         return "redirect:/questions";
+    }
+
+    @GetMapping("hot")
+    public String hotView(
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            Model model) {
+
+        PageRequest pageRequest = getPageRequest(page);
+
+        Page<Question> questionPage = questionService.findHot(pageRequest);
+
+        model.addAttribute("questionsPage", questionPage);
+
+        paging(model, questionPage);
+
+        addGlobalAttribute(model);
+
+        return "question/index";
+    }
+
+    @GetMapping("unanswered")
+    public String unansweredView(
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            Model model) {
+
+        PageRequest pageRequest = getPageRequest(page);
+
+        Page<Question> questionPage = questionService.findUnanswered(pageRequest);
+
+        model.addAttribute("questionsPage", questionPage);
+
+        paging(model, questionPage);
+
+        addGlobalAttribute(model);
+
+        return "question/index";
     }
 
 }
