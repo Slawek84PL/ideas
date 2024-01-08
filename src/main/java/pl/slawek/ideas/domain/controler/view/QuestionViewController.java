@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.slawek.ideas.IdeasConfiguration;
 import pl.slawek.ideas.domain.common.IdeasCommonViewController;
 import pl.slawek.ideas.domain.model.Question;
 import pl.slawek.ideas.domain.service.AnswerService;
@@ -27,7 +26,6 @@ class QuestionViewController extends IdeasCommonViewController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
-    private final IdeasConfiguration ideasConfiguration;
 
     @GetMapping
     public String indexView(Model model) {
@@ -65,7 +63,7 @@ class QuestionViewController extends IdeasCommonViewController {
             @RequestParam(name = "page", defaultValue = "1") int page,
             Model model) {
 
-        PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
+        PageRequest pageRequest = getPageRequest(page);
 
         Page<Question> questionPage = questionService.findHot(pageRequest);
 
@@ -83,7 +81,7 @@ class QuestionViewController extends IdeasCommonViewController {
             @RequestParam(name = "page", defaultValue = "1") int page,
             Model model) {
 
-        PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
+        PageRequest pageRequest = getPageRequest(page);
 
         Page<Question> questionPage = questionService.findUnanswered(pageRequest);
 
