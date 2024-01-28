@@ -26,7 +26,7 @@ class SearchViewController extends IdeasCommonViewController {
 
     private final QuestionService questionService;
 
-    @GetMapping("unanswered")
+    @GetMapping
     public String seatchView(
             @RequestParam(name = "query", required = false) String query,
             @RequestParam(name = "page", defaultValue = "1") int page,
