@@ -1,42 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{template :: head(title = 'Ideas -'+${question.name})}"></head>
-    <body>
-        <th:block th:replace="~{template :: header}"></th:block>
+<head th:replace="~{template :: head(title = 'Ideas - wyszukiwarka')}"></head>
+<body>
+<th:block th:replace="~{template :: header}"></th:block>
 
-    <main class="container">
-        <div class="row g-5">
-            <div class="col-md-8">
-                <article class="blog-post">
+<main class="container">
+    <div class="row g-5">
+        <div class="col-md-8">
 
-                    <h2 class="blog-post-title" th:text="${question.name}"></h2>
+            <form>
+                <input type="text" name="query" th:value="${query}">
+                <button class="btn btn-primary" type="submit">Szukaj</button>
+            </form>
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="answer : ${answers}">
-                                <td th:text="${answer.name}">Answer</td>
-                                <td>x</td>
-                                <td>y</td>
-                            </tr>
+            <a th:if="${questionsPage != null and questionsPage.getTotalElements() == 0}">Brak wyników</a>
 
-                        </tbody>
-                    </table>
+            <article th:if="${questionsPage != null and questionsPage.getTotalElements() > 0}" class="blog-post">
+                <h2 class="blog-post-title"></h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="question : ${questionsPage.content}">
+                        <td th:text="${question.name}">Question</td>
+                        <td>x</td>
+                        <td>y</td>
+                    </tr>
 
-                    <nav class="blog-pagination" aria-label="Pagination">
-                        <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
-                        <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer</a>
-                    </nav>
-                </article>
-            </div>
+                    </tbody>
+                </table>
 
-            <div class="col-md-4">
+                <nav th:if="${questionsPage != null and questionsPage.getTotalElements() > 0}" class="blog-pagination" aria-label="Pagination">
+                    <a class="btn btn-outline-primary" th:each="pageNumber : ${pageNumbers}"
+                       th:href="@{''(size=${questionsPage.size}, page=${pageNumber}, query=${query})}"
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber == questionsPage.number + 1} ? 'btn btn-outline-primary disabled' :  'btn btn-outline-primary rounded-pill'"> </a>
+                </nav>
+
+            </article>
+        </div>
+
+        <div class="col-md-4">
             <div class="position-sticky" style="top: 2rem;">
                 <div class="p-4 mb-3 bg-body-tertiary rounded">
                     <h4 class="fst-italic">About</h4>
@@ -104,9 +113,9 @@
                 </div>
             </div>
         </div>
-        </div>
-    </main>
+    </div>
+</main>
 
-        <th:block th:replace="~{template :: footer}"></th:block>
-    </body>
+<th:block th:replace="~{template :: footer}"></th:block>
+</body>
 </html>
