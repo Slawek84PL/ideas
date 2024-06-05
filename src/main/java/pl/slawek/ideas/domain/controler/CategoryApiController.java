@@ -1,5 +1,6 @@
 package pl.slawek.ideas.domain.controler;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -10,14 +11,11 @@ import pl.slawek.ideas.domain.service.CategoryService;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/categories")
+    @RequestMapping("api/v1/categories")
+@RequiredArgsConstructor
 class CategoryApiController {
 
     private final CategoryService categoryService;
-
-    CategoryApiController(final CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @GetMapping
     Page<Category> getCategories(Pageable pageable) {
