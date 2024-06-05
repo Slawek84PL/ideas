@@ -14,4 +14,14 @@ public class IdeasConfiguration {
 
     @Value("${paging.pageSize:2}")
     private int pagingPageSize;
+
+    @Value("${host.name:http://localhost}")
+    private String hostname;
+
+    @Value("${host.port:8080}")
+    private int port;
+
+    public String getFullHost() {
+        return hostname + ":" + port;
+    }
 }
